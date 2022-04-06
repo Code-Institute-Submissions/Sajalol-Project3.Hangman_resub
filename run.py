@@ -26,11 +26,17 @@ class Hangman():
         self.word_to_try = word_to_try
         self.game_progression = list('_' * len(self.word_to_try))
 
-    def locate_index(self,letter):
+    def locate_indexes(self,letter):
         """
         Takes a letter and returns a list with indexes in the word to guess
         """
         return [i for i, char in enumerate(self.word_to_try) if letter == char]
+    
+    def is_invalid_letter(self, input_):
+        """
+        Method to validate if an user input is not just a letter 
+        """
+        return input_.isdigit() or (input.isalpha() and len(input() > 1)
 
 
     def print_game(self):
@@ -78,6 +84,12 @@ class Hangman():
             else:
                 self.failed_attempts += 1
                 print("\n You lost")
+
+
+if __name__ == '__main__':
+    word_to_try = random.choice(WORDS)
+    hangman = Hangman(word_to_try)
+    hangman.play()
             
 
 
