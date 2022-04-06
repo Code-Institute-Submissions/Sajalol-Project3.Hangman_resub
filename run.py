@@ -21,22 +21,22 @@ class Hangman():
     Hangman game
     """
 
-    def __init__(self,word_to_try):
+    def __init__(self, word_to_try):
         self.failed_attempts = 0
         self.word_to_try = word_to_try
         self.game_progression = list('_' * len(self.word_to_try))
 
-    def locate_indexes(self,letter):
+    def locate_indexes(self, letter):
         """
         Takes a letter and returns a list with indexes in the word to guess
         """
-        return [i for i, char in enumerate(self.word_to_try) if letter == char]
-    
+        return [i for i, char in enumerate(self.word_to_try) if letter == char] 
+
     def is_invalid_letter(self, input_):
         """
-        Method to validate if an user input is not just a letter 
+        Method to validate if an user input is not just a letter
         """
-        return input_.isdigit() or (input.isalpha() and len(input() > 1)
+        return input_.isdigit() or (input.isalpha() and len(input) > 1)
 
 
     def print_game(self):
@@ -49,12 +49,16 @@ class Hangman():
         print(' '.join(self.game_progression))
 
     
-    def update_prog(self,letter,indexes):
+    def update_prog(self, letter, indexes):
         """
         Method to update Game progress with the guessed letters
         """
         for index in indexes:
             self.game_progression[index] = letter
+
+    def get_user_input(self):
+        user_input = input('\nType a letter: ')
+        return user_input
     
 
     def game(self):
@@ -70,11 +74,11 @@ class Hangman():
                 continue
 
             if user_input in self.game_progression:
-                print('You have already guess that')
+                print('You have already guessed that')
                 continue
 
             if user_input in self.word_to_try:
-                indexes = self.find_indexes(user_input)
+                indexes = self.locate_indexes(user_input)
                 self.update_prog(user_input, indexes)
 
                 if self.game_progression.count('_') == 0:
@@ -90,6 +94,3 @@ if __name__ == '__main__':
     word_to_try = random.choice(WORDS)
     hangman = Hangman(word_to_try)
     hangman.play()
-            
-
-
