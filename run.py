@@ -41,4 +41,43 @@ class Hangman():
         print('\n'.join(HANGMAN[:self.failed_attempts]))
         print('\n')
         print(' '.join(self.game_progression))
-print_game(self)
+
+    
+    def update_prog(self,letter,indexes):
+        """
+        Method to update Game progress with the guessed letters
+        """
+        for index in indexes:
+            self.game_progression[index] = letter
+    
+
+    def game(self):
+        """
+        Def to play the game, asking user for letter and plays the game.
+        """
+        while self.failed_attempts < len(HANGMAN):
+            self.print_game()
+            user_input = self.get_user_input()
+
+            if self.is_invalid_letter(user_input):
+                print('input not available')
+                continue
+
+            if user_input in self.game_progression:
+                print('You have already guess that')
+                continue
+
+            if user_input in self.word_to_try:
+                indexes = self.find_indexes(user_input)
+                self.update_prog(user_input, indexes)
+
+                if self.game_progression.count('_') == 0:
+                    print('\n You won!')
+                    print('The word is: {0}'.format(self.word_to_try))
+                    quit()
+            else:
+                self.failed_attempts += 1
+                print("\n You lost")
+            
+
+
