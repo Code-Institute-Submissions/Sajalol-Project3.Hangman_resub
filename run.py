@@ -8,19 +8,25 @@ HANGMAN = [
     '|       |',
     '|      /|\ ',
     '|       |',
-    '|      / \ '
+    '|      / \ ',
 ]
 
 WORDS = [
     'PYTHON', 'JAVA', 'HTML', 'CSS', 'COMPUTER', 'LOTR',
     'RONALDO', 'LAPTOP', 'BROWSER', 'LOGITECH', 'APPLE'
 ]
+print("\n-----------------------------------------")
+print("\nWelcome to a game of Hangman")
+print("Where every choice you make matters")
+print("To many wrong guesses will make you lose the game")
+print("Remember to make every guess in capital letters")
+print("\n-----------------------------------------")
 
 class Hangman():
     """
     The Hangman game
     """
-
+    
     def __init__(self, word_to_try):
         self.failed_attempts = 0
         self.word_to_try = word_to_try
@@ -56,6 +62,7 @@ class Hangman():
             self.game_progress[index] = letter
 
     def get_user_input(self):
+        print("Please choose a letter")
         user_input = input('\nType a letter: ')
         return user_input
 
@@ -86,7 +93,8 @@ class Hangman():
                     quit()
             else:
                 self.failed_attempts += 1
-        print("\n You lost")
+        print("\nYou lost")
+        print("Please try again")
 
 if __name__ == '__main__':
     word_to_try = random.choice(WORDS)
