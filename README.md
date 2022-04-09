@@ -1,31 +1,54 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Hangman
+Hangman is a Python terminal game, which runs in the code institute mock terminal on Heroku
+Users can try to beat the crossword before the man gets hanged. Each wrong guessed letter puts the man 1 step closer to getting hanged. 
 
-Welcome Stian Lystad,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+## How to play
+Hangman on Python is based on the classic "Hangman" game. You can read more about it on [Wikipedia](https://en.wikipedia.org/wiki/Hangman_(game))
+In this version, the player gets an short introduction to the game and gets asked to enter a letter. The letter must be capitalised.
+The player can see how many letters the word is, and when the player types a letter. It either gets added to the word bar, or one step is added to the hangman. 
+The player has 7 chances to guess all the right letters, if guessed 7 or more times the player loses. 
 
-## Reminders
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## Features
 
-## Creating the Heroku app
+* Random words selected from a list
+- The words are: 'PYTHON', 'JAVA', 'HTML', 'CSS', 'COMPUTER', 'LOTR', 'RONALDO', 'LAPTOP', 'BROWSER', 'LOGITECH', 'APPLE'
+- The player cannot see which word is chosen
+- One part of the hangman is added per wrong guessed letter 
+________
+|       |
+|       O
+|       |
+|      /|\ 
+|       |
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+* Input validation and error-checking
+    * You can only use letters
+    * Numbers and symbols will give you error and asked to try again
+    * You cannot guess the same letter twice
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Future Features
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+* Add more words 
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## Testing
 
-Connect your GitHub repository and deploy as normal.
+I have manually tested this project by doing the following:
 
-## Constraints
+* Passed the code through a PEP8 linter and confirmed there are no problems.
+    * Was some errors. regarding blank lines
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+## Bugs
 
------
-Happy coding!
+### Remaining bugs
+
+* Guessing the same letter twice is going through
+
+
+
+
+
+
+
+

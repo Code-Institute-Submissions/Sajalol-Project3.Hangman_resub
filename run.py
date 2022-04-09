@@ -23,10 +23,11 @@ print("Remember to make every guess in capital letters")
 print("\n-----------------------------------------")
 
 class Hangman():
+
     """
     The Hangman game
     """
-    
+ 
     def __init__(self, word_to_try):
         self.failed_attempts = 0
         self.word_to_try = word_to_try
