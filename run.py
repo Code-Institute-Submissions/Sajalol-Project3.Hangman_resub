@@ -9,6 +9,7 @@ HANGMAN = [
     '|      /|\ ',
     '|       |',
     '|      / \ ',
+    '|     /   \ ',
 ]
 
 WORDS = [
@@ -29,7 +30,7 @@ class Hangman():
     """
  
     def __init__(self, word_to_try):
-        self.failed_attempts = 0
+        self.failed_attempts = 1
         self.word_to_try = word_to_try
         self.game_progress = list('_' * len(self.word_to_try))
 
@@ -78,10 +79,6 @@ class Hangman():
 
             if self.is_invalid_letter(user_input):
                 print('Input not available')
-                continue
-
-            if user_input in self.game_progress:
-                print('You have already guessed that')
                 continue
 
             if user_input in self.word_to_try:
