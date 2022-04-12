@@ -43,8 +43,11 @@ The player has 7 chances to guess all the right letters, if guessed 7 or more ti
 
 I have manually tested this project by doing the following:
 
+* Going through the game and lost.
+* Going through the game and win.
+* Entering symbols, letters and numbers. 
 * Passed the code through a PEP8 linter and confirmed there are no problems.
-    * Was some errors. regarding blank lines
+    * Was some errors. regarding blank lines.
   
   
   
@@ -81,6 +84,7 @@ This project was deployed using Code Institute's mock terminal for Heroku.
     * Set the buildbacks to Python and NodeJS in that order
     * Link the Heroku app to the repository
     * Click on Deploy
+    * [Heroku Link](https://stian-hangman-project.herokuapp.com/)
 
 
 # Credits
