@@ -92,7 +92,7 @@ This project was deployed using Code Institute's mock terminal for Heroku.
 * Code Institute for training and deployment terminal
 * Wikipedia for info about Hangman
 * Youtubers and google for assisting
-* MiltonLn at github
+* [MiltonLn](https://gist.github.com/MiltonLn/72f4342ee938bf45881939e43b3230dc) at github
 
 
 
