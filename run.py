@@ -1,100 +1,92 @@
 import random
 
+HANGMAN_PICS = ['''
 
-HANGMAN = [
-    '________',
-    '|       |',
-    '|       O',
-    '|       |',
-    '|      /|\ ',
-    '|       |',
-    '|      / \ ',
-    '|     /   \ ',
-]
+  +---+
+      |
+      |
+      |
+     ===''', '''
 
-WORDS = [
-    'PYTHON', 'JAVA', 'HTML', 'CSS', 'COMPUTER', 'LOTR',
-    'RONALDO', 'LAPTOP', 'BROWSER', 'LOGITECH', 'APPLE'
-]
-print("\n-----------------------------------------")
-print("\nWelcome to a game of Hangman")
-print("Where every choice you make matters")
-print("To many wrong guesses will make you lose the game")
-print("Remember to make every guess in capital letters")
-print("\n-----------------------------------------")
+  +---+
+  O   |
+      |
+      |
+     ===''', '''
 
-class Hangman():
+  +---+
+  O   |
+  |   |
+      |
+     ===''', '''
 
-    """
-    The Hangman game
-    """
- 
-    def __init__(self, word_to_try):
-        self.failed_attempts = 1
-        self.word_to_try = word_to_try
-        self.game_progress = list('_' * len(self.word_to_try))
+  +---+
+  O   |
+ /|   |
+      |
+     ===''', '''
 
-    def locate_indexes(self, letter):
-        """
-        Method that takes a letter and returns a list with his indexes in
-        the word to try
-        """
-        return [i for i, char in enumerate(self.word_to_try) if letter == char]
+  +---+
+  O   |
+ /|\  |
+      |
+     ===''', '''
 
-    def is_invalid_letter(self, input_):
-        """
-        Method to validate if an user input is not just a letter
-        """
-        return input_.isdigit() or (input_.isalpha() and len(input_) > 1)
+  +---+
+  O   |
+ /|\  |
+ /    |
+     ===''', '''
 
-    def print_game(self):
-        """
-        Method to print the word to try blankspaces
-        """
-        print('\n')
-        print('\n'.join(HANGMAN[:self.failed_attempts]))
-        print('\n')
-        print(' '.join(self.game_progress))
+  +---+
+  O   |
+ /|\  |
+ / \  |
+     ===''']
 
-    def update_prog(self, letter, indexes):
-        """
-        Method to update the game progress with the guessed letters
-        """
-        for index in indexes:
-            self.game_progress[index] = letter
+WORDS = ['PYTHON', 'JAVA', 'HTML', 'CSS', 'COMPUTER', 'LOTR',
+    'RONALDO', 'LAPTOP', 'BROWSER', 'LOGITECH', 'APPLE']
 
-    def get_user_input(self):
-        print("Please choose a letter")
-        user_input = input('\nType a letter: ')
-        return user_input
+def get_random_word(word_list):
+    word_index = random.randint(0, len(word_list) - 1)
+    return word_list[word_index]
 
-    def play(self):
-        """
-        Def to play the game, asking user for letter and plays the game.
-        """
-        while self.failed_attempts < len(HANGMAN):
-            self.print_game()
-            user_input = self.get_user_input()
+missed_letters = ''
+correct_letters = ''
+secret_word = get_random_word(WORDS)
+game_is_done = False
 
+while True:
+    print('Missed letters:', missed_letters)
+    print('Correct letters:', correct_letters)
+    print(HANGMAN_PICS[len(missed_letters)])
+    
+    guess = input("Guess a letter: ").upper()
 
-            if self.is_invalid_letter(user_input):
-                print('Input not available')
-                continue
+    if guess in secret_word:
+        correct_letters = correct_letters + guess
 
-            if user_input in self.word_to_try:
-                indexes = self.locate_indexes(user_input)
-                self.update_prog(user_input, indexes)
+        found_all_letters = True
+        for i in range(len(secret_word)):
+            if secret_word[i] not in correct_letters:
+                found_all_letters = False
+                break
+        if found_all_letters:
+            print("Yes, the secret word is " + secret_word + "! You win!")
+            game_is_done = True
+    else:
+        missed_letters = missed_letters + guess
 
-                if self.game_progress.count('_') == 0:
-                    print('You won!')
-                    print('The word is: {0}'.format(self.word_to_try))
-                    quit()
-            else:
-                self.failed_attempts += 1
-        print("\nYou lost")
-        print("Please try again")
+        if len(missed_letters) == len(HANGMAN_PICS) - 1:
+            print(HANGMAN_PICS[-1])
+            print("You have run out of guesses!\nAfter " + str(len(missed_letters)) + " missed guesses and " + str(len(correct_letters)) + " correct guesses, the word was " + secret_word + "")
+            game_is_done = True
 
-if __name__ == '__main__':
-    word_to_try = random.choice(WORDS)
-    hangman = Hangman(word_to_try)
-    hangman.play()
+    if game_is_done:
+        if input("Do you want to play again? (yes or no)").lower().startswith('y'):
+            missed_letters = ''
+            correct_letters = ''
+            secret_word = get_random_word(WORDS)
+            game_is_done = False
+        else:
+            break
