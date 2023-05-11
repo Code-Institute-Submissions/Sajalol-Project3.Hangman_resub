@@ -63,6 +63,14 @@ while True:
     
     guess = input("Guess a letter: ").upper()
 
+    if len(guess) != 1 or not guess.isalpha():
+        print("Please enter only a single letter.")
+        continue
+
+    if guess in missed_letters or guess in correct_letters:
+        print('You already guessed that letter.')
+        continue
+
     if guess in secret_word:
         correct_letters = correct_letters + guess
 
